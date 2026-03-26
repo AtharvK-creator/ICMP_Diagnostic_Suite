@@ -70,15 +70,17 @@ PERF google.com
 ## Sample Output
 
 Reply from 142.250.xxx.xxx  
-ICMP Type = 0, Code = 0  
 RTT = 32 ms  
+
+Packets Sent: 4  
+Packets Received: 4  
+Packet Loss: 0%  
 
 Invalid hostname or unreachable domain  
 
 1   192.168.1.1  
 2   10.23.xxx.xxx  
 3   * * * Request timed out  
-
 ---
 
 ## Security Implementation
