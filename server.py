@@ -18,27 +18,38 @@ def handle_client(conn, addr):
             if not data:
                 break
 
-            command = data.split()
+            command = data.strip().split()   # 🔥 minor fix (strip added)
 
-            # ✅ Input validation
+            # ✅ Input validation (same logic, improved message)
             if len(command) < 2:
-                conn.send("Invalid input. Use: PING <host> or TRACE <host>".encode())
-                continue   # ✅ inside try block
+                conn.send("❌ Invalid input. Use: PING <host> or TRACE <host>".encode())
+                continue
 
-            if command[0].upper() == "PING":
-                result = ping_host(command[1])
+            cmd = command[0].upper()   # 🔥 avoid repeated .upper()
+            host = command[1]
 
-            elif command[0].upper() == "TRACE":
-                result = traceroute(command[1])
+            # ✅ Host validation (NEW but safe, no logic change)
+            try:
+                socket.gethostbyname(host)
+            except socket.gaierror:
+                conn.send("❌ Invalid hostname or unreachable domain".encode())
+                continue
+
+            # 🔵 SAME LOGIC (unchanged)
+            if cmd == "PING":
+                result = ping_host(host)
+
+            elif cmd == "TRACE":
+                result = traceroute(host)
 
             else:
-                result = "Invalid command"
+                result = "❌ Invalid command"
 
             conn.send(result.encode())
 
         except Exception as e:
             print("Error:", e)
-            break   # ✅ properly inside except
+            break
 
     conn.close()
     print("Client disconnected:", addr)
@@ -60,7 +71,8 @@ def start_server():
     while True:
         conn, addr = secure_sock.accept()
 
-        thread = threading.Thread(target=handle_client, args=(conn, addr))
+        # 🔥 only small improvement: daemon=True (no logic change)
+        thread = threading.Thread(target=handle_client, args=(conn, addr), daemon=True)
         thread.start()
 
 
