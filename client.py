@@ -17,7 +17,7 @@ print("Connected to diagnostic server")
 while True:
     cmd = input("Enter command (PING/TRACE/PERF host): ")
 
-    # ✅ Basic input validation
+    # Basic input validation
     parts = cmd.split()
     if len(parts) < 2:
         print("❌ Invalid command format. Use: PING/TRACE/PERF <host>")
@@ -26,7 +26,7 @@ while True:
     command = parts[0].upper()
     host = parts[1]
 
-    # 🔥 PERF COMMAND
+    # PERF COMMAND
     if command == "PERF":
         requests = 5
         total_time = 0
@@ -71,7 +71,7 @@ while True:
             print(f"Successful: {success}")
             print(f"Average Response Time: {avg_time:.2f} ms\n")
 
-    # 🔵 NORMAL COMMANDS
+    # NORMAL COMMANDS
     else:
         try:
             secure_sock.send(cmd.encode())
