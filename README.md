@@ -91,9 +91,9 @@ Invalid hostname or unreachable domain
 ---
 
 ## How to Run
-
+IMP (This is structured for Linux)
 ### Start Server
-python3 server.py
+python3 server.py (Run as administrator)
 
 ### Start Client
 python3 client.py
