@@ -93,7 +93,7 @@ Invalid hostname or unreachable domain
 ## How to Run
 IMP (This is structured for Linux)
 ### Start Server
-python3 server.py (Run as administrator)
+python3 server.py (Run as administrator use sudo command)
 
 ### Start Client
 python3 client.py
